@@ -17,12 +17,16 @@ void setpixel(int x, int y) {
 	buffer[y][x] = '@';
 }
 
+void setpixelch(int x, int y, char ch) {
+	buffer[y][x] = ch;
+}
+
 void fill(char ch, short isSet) {
 	for (int i = 0; i < SCREENH; i++) {
 		for (int j = 0; j < SCREENW; j++) {
 			putchar(ch);
 			if (isSet == 1)
-				buffer[i][j] = ch;
+				setpixelch(j, i, ch);
 		}
 	}
 	gotoxy(0, 0);
@@ -31,7 +35,7 @@ void fill(char ch, short isSet) {
 void drawSquare(int x, int y, int h, int w) {
 	for (int i = x; i <= h+1; i++) {
 		for (int j = y; j <= w+1; j++) {
-			buffer[i][j] = '@';
+			setpixel(j, i);
 		}
 	}
 }
@@ -102,8 +106,8 @@ void main(void) {
 	system("cls");
 	fill('a', 1);
 	for (;;) {
-		//drawSphere(0, 0, 5);
-		drawLine(0, 0, 5*3, 3*3);
+		drawSphere(0, 0, 10);
+		drawLine(10, 10, 25, 25);
 		drawBuffer();
 		gotoxy(0, 0);
 	}
